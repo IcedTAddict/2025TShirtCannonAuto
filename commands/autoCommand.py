@@ -11,16 +11,18 @@ class autoCommand(commands2.CommandBase):
         self.addRequirements(arcade_drive, limelight)
 
     def execute(self) -> None:
-        if (limelight.results.tagId if limelight.results else 'none' != 'none'):
-            match(limelight.results.tagId if limelight.results else 'none'):
+        res = self.limelight.get_results()
+
+        if (res.tagId if res else 'none' != 'none'):
+            match(res.tagId if res else 'none'):
                 case True:
-                    self.arcade_drive.arcadeDrive(0, 0.6)
+                    self.arcade_drive.arcadeDrive(0, 0.5)
                 case False:
-                    self.arcade_drive.arcadeDrive(0, -0.6)
+                    self.arcade_drive.arcadeDrive(0, -0.5)
                 case _:
-                    self.arcade_drive.arcadeDrive(0, 0)
+                    self.arcade_drive.arcadeDrive(0.5, 0)
         else:
-            self.arcade_drive.arcadeDrive(0, 0)
+            self.arcade_drive.arcadeDrive(0.5, 0)
 
 
     def isFinished(self) -> bool:

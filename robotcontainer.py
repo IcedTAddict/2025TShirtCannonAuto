@@ -11,7 +11,7 @@ from commands.arcadedrive import ArcadeDrive
 from subsystems.limelight import limelightSystem
 from commands.limelightdisplay import limelightDisplay
 
-import commands.autoCommand
+from commands.autoCommand import autoCommand
 
 
 class RobotContainer:
