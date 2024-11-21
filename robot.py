@@ -25,10 +25,20 @@ class MyRobot(commands2.TimedCommandRobot):
 
     autonomousCommand: typing.Optional[commands2.Command] = None
 
+    def autonomousInit(self):
+        self.autonomousCommand = self.container.getAutonomousCommand()
+
+        if self.autonomousCommand:
+            self.autonomousCommand.schedule()
+
+    def autonomousPeriodic(self):
+        commands2.CommandScheduler.getInstance().run()
+
     def robotInit(self):
         """Robot initialization function"""
 
         self.container = RobotContainer()
+        
     def teleopPeriodic(self):
         commands2.CommandScheduler.getInstance().run()
             
